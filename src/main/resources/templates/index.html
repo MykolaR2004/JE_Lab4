@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients list page</title>
+</head>
+<body>
+<div class="container">
+  <h2>Client List</h2>
+  <table class="client-info-table">
+    <thead>
+    <tr>
+      <th><a th:href="@{'/sortedClients?sort=id'}">id</a></th>
+      <th><a th:href="@{'/sortedClients?sort=name'}">First Name</a></th>
+      <th><a th:href="@{'/sortedClients?sort=surname'}">Last Name</a></th>
+      <th><a th:href="@{'/sortedClients?sort=aboutYourself'}">About yourself</a></th>
+      <th><a th:href="@{'/sortedClients?sort=age'}">age</a></th>
+      <th><a th:href="@{'/sortedClients?sort=sex'}">sex</a></th>
+      <th><a th:href="@{'/sortedClients?sort=birthdate'}">birthdate</a></th>
+      <th><a th:href="@{'/sortedClients?sort=hobby'}">hobby</a></th>
+      <th><a th:href="@{'/sortedClients?sort=requirement'}">requirement</a></th>
+      <th>client info</th>
+      <th>dates info</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${clients}">
+      <td th:text="${c.getId()}"></td>
+      <td th:text="${c.getName()}"></td>
+      <td th:text="${c.getSurname()}"></td>
+      <td th:text="${c.getAboutYourself()}"></td>
+      <td th:text="${c.getAge()}"></td>
+      <td th:text="${c.getSex()}"></td>
+      <td th:text="${c.getBirthdate()}"></td>
+      <td th:text="${c.getHobby()}"></td>
+      <td th:text="${c.getRequirement()}"></td>
+      <td>
+        <form th:action="@{/dates_info}" method="get">
+          <input type="hidden" name="id" th:value="${c.getId()}"/>
+          <button type="submit" class="btn btn-info">Look dates</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

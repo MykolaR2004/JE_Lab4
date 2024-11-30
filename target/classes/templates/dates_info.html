@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title>Client Info</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="container">
+  <form method="get" action="/" class="back-button-form">
+    <input type="submit" value="Go to Home" class="btn btn-sm btn-secondary">
+  </form>
+  <form action="/client_info" method="get" class="back-button-form">
+    <input type="hidden" name="id" th:value="${client.id}" >
+    <input type="submit" value="About client" class="btn btn-sm btn-secondary">
+  </form>
+
+
+  <h2>Client Information</h2>
+  <table class="client-info-table">
+    <thead>
+    <tr>
+      <th>Date ID</th>
+      <th>Made the Appointment</th>
+      <th>Got the Appointment</th>
+      <th>Date</th>
+      <th>Country</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${clientinfo}">
+      <td th:text="${c.getId()}"></td>
+      <td th:text="${c.getClient1()}"></td>
+      <td th:text="${c.getClient2()}"></td>
+      <td th:text="${c.getDate() != null ? c.getDate() : c.getId()}"></td>
+      <td th:text="${c.getCountry()}"></td>
+      <td>
+        <form th:action="@{/edit_date}" method="get">
+          <input type="hidden" name="date_id" th:value="${c.getId()}" required>
+          <input type="hidden" name="client_id" th:value="${client.getId()}" required>
+          <button type="submit" class="btn btn-info">Edit date</button>
+        </form>
+      </td>
+      <td>
+        <form th:action="@{/delete_date}" method="post">
+          <input type="hidden" name="date_id" th:value="${c.getId()}" required>
+          <input type="hidden" name="client_id" th:value="${client.getId()}" required>
+          <button type="submit" class="btn btn-danger">Delete date</button>
+        </form>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <h2>Add New Date</h2>
+  <form method="post" action="add_date" class="form-container">
+    <input type="hidden" name="firstid" th:value="${client.getId()}" required>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="datetime-local" id="date" name="date" class="text-input" required>
+    </div>
+    <div class="form-group">
+      <label for="country">Country:</label>
+      <select class="form-select" name="country" id="country">
+        <option th:each="cntr : ${countrylist}" th:value="${cntr.getID()}" th:text="${cntr.getCountry_name()}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="client">Client:</label>
+      <select class="form-select" name="secondid" id="client">
+        <option th:each="c : ${clients}" th:value="${c.getId()}" th:text="${c.getName()}"></option>
+      </select>
+    </div>
+    <input type="submit" value="Add Date" class="btn btn-sm btn-primary">
+  </form>
+</div>
+</body>
+</html>
