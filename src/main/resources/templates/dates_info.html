@@ -3,18 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Client Info</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div class="container">
   <form method="get" action="/" class="back-button-form">
     <input type="submit" value="Go to Home" class="btn btn-sm btn-secondary">
   </form>
-  <form action="/client_info" method="get" class="back-button-form">
-    <input type="hidden" name="id" th:value="${client.id}" >
-    <input type="submit" value="About client" class="btn btn-sm btn-secondary">
-  </form>
-
 
   <h2>Client Information</h2>
   <table class="client-info-table">
