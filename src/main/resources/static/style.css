@@ -141,7 +141,6 @@ input[type="datetime-local"] {
     background-color: #5a6268;
 }
 
-/* Кнопки "Назад" */
 .back-button-form {
     display: inline-block;
     margin-right: 10px;
