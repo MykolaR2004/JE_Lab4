@@ -47,22 +47,14 @@ public class Controller {
 
     @GetMapping("/edit_date")
     public String editDate(@RequestParam int date_id, int client_id, Model model) {
-        // Загрузить информацию о встрече по date_id
-
-        // Добавить информацию в модель
         model.addAttribute("dateInfo", cs.getDateByIdInfo(date_id));
         model.addAttribute("client",cs.getNameSurnameById(client_id));
-
-        // Отображение страницы редактирования
         return "edit_date";
     }
 
     @PostMapping("/update_date")
     public String updateDate(@RequestParam int date_id, int client_id,
-//                             @RequestParam String client1,
-//                             @RequestParam String client2,
                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
-//                             @RequestParam String country,
                              Model model) {
         cs.updateDate(date_id, date);
         return "redirect:/dates_info?id=" + client_id;
